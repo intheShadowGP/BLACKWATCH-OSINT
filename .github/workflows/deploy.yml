@@ -16,7 +16,7 @@ concurrency:
 jobs:
   test:
     name: Typecheck, tests, security, build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       BASE_PATH: /${{ github.event.repository.name }}/
     steps:
@@ -58,7 +58,7 @@ jobs:
     name: Deploy to GitHub Pages
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
