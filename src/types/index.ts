@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+// Zod's JIT probes `new Function`, which the strict CSP (script-src 'self',
+// no 'unsafe-eval') blocks and Firefox reports as a violation. Run jitless.
+z.config({ jitless: true });
+
 /* ------------------------------------------------------------------ */
 /* Shared enumerations                                                 */
 /* ------------------------------------------------------------------ */
