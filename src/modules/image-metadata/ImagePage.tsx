@@ -43,7 +43,7 @@ async function dimensions(f: Blob): Promise<{ width: number; height: number } | 
 export default function ImagePage() {
   const { t, td } = useI18n();
   const settings = useSettings();
-  const { activeId, toast, reportError } = useApp();
+  const { attachId: activeId, toast, reportError } = useApp();
   const [items, setItems] = useState<Analysed[]>([]);
   const [compare, setCompare] = useState('');
   const [drag, setDrag] = useState(false);

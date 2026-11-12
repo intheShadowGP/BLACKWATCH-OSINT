@@ -244,6 +244,14 @@ test('real lookups are never attached to the demonstration investigation', async
   await page.getByRole('dialog').getByRole('button', { name: 'Launch' }).click();
   await page.getByRole('tab', { name: /All results/ }).click();
   await expect(page.getByRole('button', { name: 'Add to investigation' }).first()).toBeDisabled();
+
+  // Local modules are guarded too.
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+  await page.goto('./#/image');
+  await page.getByLabel('Choose images').setInputFiles({ name: 'pixel.png', mimeType: 'image/png', buffer: png });
+  await expect(page.getByRole('button', { name: 'Add to investigation' })).toBeDisabled();
+  await page.goto('./#/geoint?q=48.8584,%202.2945');
+  await expect(page.getByRole('button', { name: 'Link to an event' })).toBeDisabled();
 });
 
 test('dashboard cards can be hidden and the layout persists', async ({ page }) => {

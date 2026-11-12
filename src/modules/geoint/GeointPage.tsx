@@ -21,7 +21,7 @@ export default function GeointPage() {
   const { t } = useI18n();
   const [params] = useSearchParams();
   const settings = useSettings();
-  const { activeId, active, toast, reportError } = useApp();
+  const { activeId, attachId, active, toast, reportError } = useApp();
   const { addValue } = useAddToInvestigation();
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -254,7 +254,7 @@ export default function GeointPage() {
                   <Button size="sm" variant="gold" disabled={!activeId} onClick={() => addValue('location', reverse?.name ?? conv.decimal, { sourceId: reverse ? 'nominatim' : 'manual', sourceName: reverse ? 'OpenStreetMap Nominatim' : 'Analyst input', url: reverse?.osmUrl ?? conv.osm, collectedAt: nowIso() }, { lat: current.lat, lon: current.lon, label: conv.decimal })}>
                     {t('geo.addLocation')}
                   </Button>
-                  <Button size="sm" variant="ghost" icon={<CalendarPlus className="size-3.5" />} disabled={!activeId} onClick={() => setEventOpen(true)}>
+                  <Button size="sm" variant="ghost" icon={<CalendarPlus className="size-3.5" />} disabled={!attachId} onClick={() => setEventOpen(true)}>
                     {t('geo.linkEvent')}
                   </Button>
                 </div>
@@ -348,10 +348,10 @@ export default function GeointPage() {
               variant="primary"
               disabled={!evTitle.trim() || !evDate}
               onClick={async () => {
-                if (!activeId || !current) return;
+                if (!attachId || !current) return;
                 try {
                   await addEvent({
-                    investigationId: activeId,
+                    investigationId: attachId,
                     title: evTitle.trim(),
                     description: reverse?.name ?? '',
                     datetime: new Date(evDate).toISOString(),
