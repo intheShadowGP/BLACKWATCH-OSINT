@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bw-bg: #09090a;
+  --color-bw-panel: #111113;
+  --color-bw-panel2: #17171a;
+  --color-bw-elev: #1e1e22;
+  --color-bw-border: #2a2a30;
+  --color-bw-red: #8e1b22;
+  --color-bw-red-bright: #c42f37;
+  --color-bw-gold: #c9a54a;
+  --color-bw-gold-dim: #8a7232;
+  --color-bw-text: #ece7de;
+  --color-bw-muted: #9b958b;
+  --color-bw-ok: #3f9d5b;
+  --color-bw-warn: #d08b2c;
+  --color-bw-info: #4c7fc0;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bw-bg);
+  color: var(--color-bw-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle "operations room" grid behind the main area. */
+.bw-grid {
+  background-image:
+    linear-gradient(rgba(201, 165, 74, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 165, 74, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+::selection {
+  background: rgba(196, 47, 55, 0.45);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-bw-gold);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c2c33;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Leaflet dark adjustments */
+.leaflet-container {
+  background: #0d0d10;
+  font-family: var(--font-sans);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-bw-panel2);
+  color: var(--color-bw-text);
+  border: 1px solid var(--color-bw-border);
+}
+.leaflet-control-attribution {
+  background: rgba(10, 10, 12, 0.8) !important;
+  color: #aaa !important;
+}
+.leaflet-control-attribution a {
+  color: var(--color-bw-gold) !important;
+}
+.bw-tiles-dim .leaflet-tile-pane {
+  filter: brightness(0.75) contrast(1.1) saturate(0.7);
+}
